@@ -34,7 +34,9 @@ export default function TimerScreen() {
         sound: true,
       },
       trigger: {
-        seconds: hours * 3600,
+        type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+        seconds: Math.round(hours * 3600),
+        repeats: false,
       },
     });
 

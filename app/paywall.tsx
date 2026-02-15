@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'rea
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import * as Haptics from 'expo-haptics';
-import { colors, spacing, borderRadius, fontSize, fontWeight } from '../../src/theme';
-import { useSubscription } from '../../src/services/purchases';
+import { colors, spacing, borderRadius, fontSize, fontWeight } from '../src/theme';
+import { useSubscription } from '../src/services/purchases';
 
 const FEATURES = [
   { icon: '📍', title: 'Unlimited History', desc: 'Save as many parking spots as you want' },

@@ -28,6 +28,7 @@ interface ParkSpotState {
   setPremium: (value: boolean) => void;
   completeOnboarding: () => void;
   loadFromStorage: () => Promise<void>;
+  persist: () => Promise<void>;
 }
 
 export const useParkSpotStore = create<ParkSpotState>((set, get) => ({

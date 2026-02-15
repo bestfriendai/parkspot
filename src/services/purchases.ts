@@ -1,34 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useParkSpotStore } from '../store/parkingStore';
 
-// RevenueCat integration stub
-// In production, install: npm install react-native-purchases @react-native-purchases/purchases
-
-export const REVENUECAT_API_KEY = 'REPLACE_WITH_YOUR_API_KEY';
-
-export type SubscriptionStatus = 'active' | 'inactive' | 'loading';
+export type SubscriptionStatus = 'active' | 'inactive';
 
 export function useSubscription() {
-  const [status, setStatus] = useState<SubscriptionStatus>('loading');
-  const [isPro, setIsPro] = useState(false);
+  const isPro = useParkSpotStore((state) => state.isPremium);
 
-  useEffect(() => {
-    const loadSubscription = async () => {
-      try {
-        // In production: initialize RevenueCat and check entitlements
-        setStatus('inactive');
-        setIsPro(false);
-      } catch (error) {
-        console.error('Failed to load subscription:', error);
-        setStatus('inactive');
-      }
-    };
+  const status: SubscriptionStatus = isPro ? 'active' : 'inactive';
 
-    loadSubscription();
-  }, []);
-
-  const openPaywall = () => {
-    return '/paywall';
-  };
+  const openPaywall = () => '/paywall';
 
   return { status, isPro, openPaywall };
 }

@@ -133,7 +133,18 @@ export default function HomeScreen() {
     });
 
     if (!result.canceled) {
-      // Would save photo to spot - for demo we'll just confirm
+      if (!currentSpot) {
+        Alert.alert('No Active Spot', 'Save a parking spot before attaching a photo.');
+        return;
+      }
+
+      const imageUri = result.assets?.[0]?.uri;
+      if (!imageUri) {
+        Alert.alert('Error', 'Could not read the captured photo. Please try again.');
+        return;
+      }
+
+      saveSpot({ ...currentSpot, imageUri });
       Alert.alert('Photo Saved', 'Photo has been attached to your parking spot.');
     }
   };
@@ -150,7 +161,9 @@ export default function HomeScreen() {
         body: `Your parking meter expires in ${hours} hour${hours > 1 ? 's' : ''}. Time to move!`,
       },
       trigger: {
+        type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
         seconds: hours * 3600,
+        repeats: false,
       },
     });
   };
